@@ -1,0 +1,29 @@
+{
+    "name": "wirke/woowire",
+    "description": "Livewire Frontend Boilerplate for Woocommerce",
+    "version": "1.0.0",
+    "type": "library",
+    "require": {
+        "php": "^8.1",
+        "livewire/livewire": "^3.5",
+        "illuminate/console": "^10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Wirke\\Woowire\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Wirke\\Woowire\\WoowireServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "filip",
+            "email": "filipwessman@hotmail.com"
+        }
+    ]
+}
