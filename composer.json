@@ -1,12 +1,14 @@
 {
     "name": "wirke/woowire",
     "description": "Livewire Frontend Boilerplate for Woocommerce",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "type": "library",
     "require": {
         "php": "^8.1",
         "livewire/livewire": "^3.5",
-        "illuminate/console": "^10"
+        "illuminate/console": "^10",
+        "wpackagist-plugin/woocommerce": "^9.0",
+        "generoi/sage-woocommerce": "^1.1"
     },
     "autoload": {
         "psr-4": {
