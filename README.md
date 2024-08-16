@@ -22,8 +22,12 @@ I don't intend to do anything to big affecting the checkout or how the backend w
 
 ## What you should do
 
-you can add the `@liveiwre('cart')` component somewhere in your navigation to get that thing going.
+you can add the `@liveiwre('woo-wire-cart')` component somewhere in your navigation to get that thing going.
 you should also probably remove the basic woocommerce styling with this filter
 ```
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 ```
+
+## Updates
+
+if you want to overwrite the files you copied with the publish commands with a newer version you can use `woowire:update`
