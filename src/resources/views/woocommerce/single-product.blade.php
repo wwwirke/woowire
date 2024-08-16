@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    @livewire('product-single')
+    @livewire('woo-wire-product-single')
 @endsection

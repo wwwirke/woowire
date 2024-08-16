@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Traits\WooCommerceProductsTrait;
 
-class ProductSingle extends Component
+class WooWireProductSingle extends Component
 {
 
     use WooCommerceProductsTrait;
@@ -79,6 +79,6 @@ class ProductSingle extends Component
     
     public function render()
     {
-        return view('livewire.product-single');
+        return view('livewire.woo-wire-product-single');
     }
 }

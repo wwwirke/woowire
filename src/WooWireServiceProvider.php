@@ -4,6 +4,8 @@ namespace Wirke\Woowire;
 
 use Illuminate\Support\ServiceProvider;
 use Wirke\Woowire\Console\Publish;
+use Wirke\Woowire\Console\Update;
+
 
 class WoowireServiceProvider extends ServiceProvider
 {
@@ -12,6 +14,7 @@ class WoowireServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 Publish::class,
+                Update::class,
             ]);
         }
 

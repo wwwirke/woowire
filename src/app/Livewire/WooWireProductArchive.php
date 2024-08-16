@@ -6,7 +6,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use App\Traits\WooCommerceProductsTrait;
 
-class ProductArchive extends Component
+class WooWireProductArchive extends Component
 {
 
     use WooCommerceProductsTrait;
@@ -16,6 +16,14 @@ class ProductArchive extends Component
     public string $sort = 'ASC';
     
     public string $orderby = 'title';
+
+    public int $columns = 2;
+
+    public int $rows = 3;
+
+    public int $limit = 0;
+
+    public string $category = '';
 
     public bool $areThereMoreProducts = true;
     
@@ -27,22 +35,33 @@ class ProductArchive extends Component
         
         if(!isset($query['product_cat'])) {
             $query['product_cat'] = '';
+        } else {
+            $this->category = $query['product_cat'];
         }
 
         if(!isset($query['posts_per_page'])) {
             $query['posts_per_page'] = -1;
+        } else {
+            $this->limit = $query['posts_per_page'];
         }
 
+        $columns = get_option('woocommerce_catalog_columns');
+        if($columns) {
+            $this->columns = $columns;
+        }
 
-        return $query;
+        $rows = get_option('woocommerce_catalog_rows');
+        if($rows) {
+            $this->rows = $rows;
+        }
+
     }
 
     public function getAllProducts()
     {
-        $query = $this->parseWooCommerceArchiveQuery();
         $wcProducts = wc_get_products([
-            'limit' => $query['posts_per_page'],
-            'product_cat' => $query['product_cat'],
+            'limit' => $this->limit,
+            'product_cat' => $this->category,
             'page' => $this->paginationPage,
             'sort' => $this->sort,
             'orderby' => $this->orderby,
@@ -53,7 +72,7 @@ class ProductArchive extends Component
         }
 
         // return true or false to indicate wheter there are more products to load
-        if($query['posts_per_page'] !== count($wcProducts)){
+        if($this->limit !== count($wcProducts)){
             return false;
         }
         return true;
@@ -67,6 +86,7 @@ class ProductArchive extends Component
 
     public function mount()
     {
+        $this->parseWooCommerceArchiveQuery();
         $this->areThereMoreProducts = $this->getAllProducts();
         $this->dispatch('getcart');
     }
@@ -74,6 +94,6 @@ class ProductArchive extends Component
     #[Layout('layouts.livewire')]
     public function render()
     {
-        return view('livewire.product-archive');
+        return view('livewire.woo-wire-product-archive');
     }
 }

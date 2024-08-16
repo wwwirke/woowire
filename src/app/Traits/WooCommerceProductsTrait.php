@@ -16,8 +16,7 @@ trait WooCommerceProductsTrait
             $this->dispatch('getcart');
             $this->dispatch('opencart');
         } else {
-            //handle error
-            ray($result);
+            //handle error            
         }
         
     }
@@ -34,11 +33,14 @@ trait WooCommerceProductsTrait
             'id' => $product->get_id(),
             'name' => $product->get_name(),
             'categories' => $categoreis,
-            'price' => $product->get_price(),
+            'price' => $product->get_regular_price(),
+            'sale' => $product->get_sale_price(),
             'permalink' => $product->get_permalink(),
             'image' => get_permalink($product->get_image_id()),
             'selectedVariant' => $productVariants ? $productVariants[0] : null,
             'childProducts' =>  $this->getProductVariants($productVariants,$product),
+            'stock' => $product->get_stock_quantity(),
+            'description' => $product->get_description(),
             'attributes' => [],
         ];
         
@@ -56,7 +58,7 @@ trait WooCommerceProductsTrait
         if($productVariants){
             $structuresChildProducts = [];
             foreach ($productVariants as $id) {
-                $structuresChildProducts[] = $this->getStructuredChildProduct($id,$product);
+                $structuresChildProducts[$id] = $this->getStructuredChildProduct($id,$product);
             }
             return $structuresChildProducts;
         } else {
@@ -72,10 +74,13 @@ trait WooCommerceProductsTrait
         return [
             'id' => $childProductId,
             'name' => str_replace($parentProduct->get_name(), '', $childProduct->get_name()),
-            'price' => $childProduct->get_price(),
+            'price' => $childProduct->get_regular_price(),
+            'sale' => $childProduct->get_sale_price(),
             'permalink' => $parentProduct->get_permalink() . '?variation_id=' . $childProductId,
             'image' => $childProduct->get_image_id() ? get_permalink($childProduct->get_image_id()) : get_permalink($parentProduct->get_image_id()),
             'attributes' => $childProduct->get_attributes(),
+            'stock' => $childProduct->get_stock_quantity(),
+            'description' => $childProduct->get_description(),
         ];
     }
 }

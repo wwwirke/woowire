@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class ProductSingleContentVariable extends Component
+class WooWireProductCardVariable extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class ProductSingleContentVariable extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.product-single-content-variable');
+        return view('components.woo-wire-product-card-variable');
     }
 }
