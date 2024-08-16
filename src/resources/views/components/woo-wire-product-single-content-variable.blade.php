@@ -31,13 +31,13 @@
         </div>
 
         @foreach ($product['childProducts'] as $childProduct)
-            <div x-show="$wire.currentProduct.selectedVariant == '{{ $childProduct['id'] }}'">
+            <div x-show="$wire.currentProduct.selectedVariant == {{ $childProduct['id'] }}">
                 @if ($childProduct['stock'] < 10 && $childProduct['stock'] > 0)
                     <div class="text-gray-400 text-sm">
                         Only {{ $childProduct['stock'] }} left in stock
                     </div>
                 @endif
-                @if ($childProduct['stock'] < 0)
+                @if ($childProduct['stock'] > 0)
                     <button wire:click="addToCart({{ $childProduct['id'] }})" class="relative items-center justify-center rounded-md border border-transparent bg-gray-100 px-8 py-2 text-sm font-medium active:bg-gray-200 hover:ring-2 ring-offset-2 ring-gray-100">Add to bag</button>
                 @else
                     <div class="text-gray-400 text-sm">
@@ -45,7 +45,6 @@
                     </div>
                 @endif
             </div>
-            <button x-show="$wire.currentProduct.selectedVariant == '{{ $childProduct['id'] }}'" wire:click="addToCart({{ $childProduct['id'] }})" class="relative items-center justify-center rounded-md border border-transparent bg-gray-100 px-8 py-2 text-sm font-medium active:bg-gray-200 hover:ring-2 ring-offset-2 ring-gray-100">Add to bag</button>
         @endforeach
     </div>
     <script>
