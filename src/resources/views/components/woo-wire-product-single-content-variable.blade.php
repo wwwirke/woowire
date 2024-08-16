@@ -9,7 +9,14 @@
         <div class="flex space-x-2 items-center justify-between">
             <h1 class="text-2xl font-bold">{{ $product['name'] }}</h1>
             @foreach ($product['childProducts'] as $childProduct)
-                <p class="relative text-lg" x-show="$wire.currentProduct.selectedVariant == '{{ $childProduct['id'] }}'">{{ $childProduct['price'] }} {!! get_woocommerce_currency_symbol() !!}</p>
+                <div x-show="$wire.currentProduct.selectedVariant == '{{ $childProduct['id'] }}'">
+                    @if ($childProduct['sale'])
+                        <span>{{ $childProduct['sale'] }} {!! get_woocommerce_currency_symbol() !!}</span>
+                        <span class="line-through text-gray-400">{{ $childProduct['price'] }} {!! get_woocommerce_currency_symbol() !!}</span>
+                    @else
+                        <span>{{ $childProduct['price'] }} {!! get_woocommerce_currency_symbol() !!}</span>
+                    @endif
+                </div>
             @endforeach
         </div>
 

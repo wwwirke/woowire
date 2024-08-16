@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use Livewire\Attributes\On; 
+use Livewire\Attributes\On;
 use App\Traits\WooCommerceProductsTrait;
 
 class WooWireCart extends Component
@@ -16,7 +16,7 @@ class WooWireCart extends Component
 
     public $cartopen = false;
 
-    #[On('getcart')] 
+    #[On('getcart')]
     public function getTheCart()
     {
         $cartItems = [];
@@ -27,8 +27,8 @@ class WooWireCart extends Component
         foreach ($cartItems as $key => $cartItem) {
             $product = wc_get_product($cartItem['product_id']);
             $this->cartItems[$cartItem['key']] = array_merge(
-                $this->getStructuredProduct($product)
-            ,[
+                $this->getStructuredProduct($product),
+                [
                 'product_id' => $cartItem['product_id'],
                 'variation_id' => $cartItem['variation_id'],
                 'variation' => $cartItem['variation'],
@@ -37,7 +37,8 @@ class WooWireCart extends Component
                 'line_subtotal_tax' => $cartItem['line_subtotal_tax'],
                 'line_total' => $cartItem['line_total'],
                 'line_tax' => $cartItem['line_tax'],
-            ]);
+            ]
+            );
         }
         $this->cartTotal = $cart->get_total('edit');
     }
@@ -50,7 +51,7 @@ class WooWireCart extends Component
 
     public function removeCartItem($key)
     {
-        WC()->cart->remove_cart_item($key);
+        WC()->cart->set_quantity($key, $this->cartItems[$key]['quantity'] - 1);
         $this->dispatch('getcart');
         $this->dispatch('opencart');
     }

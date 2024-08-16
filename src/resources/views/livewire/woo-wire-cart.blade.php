@@ -19,8 +19,9 @@
                                     <span class="text-gray-500 text-sm">{{ $cartItem['childProducts'][$cartItem['variation_id']]['name'] }}</span>
                                 @endif
                             </div>
-                            <div class="text-sm">
-                                <span>{{ $cartItem['quantity'] }}</span>
+                            <div>
+                                <span class="text-xs text-gray-400">Quantity:</span>
+                                <span class="text-sm">{{ $cartItem['quantity'] }}</span>
                             </div>
                         </div>
                         <div class="flex flex-col justify-between items-end text-sm">
@@ -30,7 +31,7 @@
                     </div>
                 </div>
             @empty
-                Tom
+                Empty
             @endforelse
         </div>
         <div class="flex flex-col p-4 space-y-2">
