@@ -4,7 +4,7 @@
         <div class="relative h-72 w-full overflow-hidden rounded-lg">
             <img src="{{ $product['image'] }}" class="h-full w-full object-cover object-center">
         </div>
-        <div class="relative mt-4">
+        <div class="relative mt-4 flex justify-between">
             <h3 class="text-sm font-medium text-gray-800">{{ $product['name'] }}</h3>
             <x-woo-wire-categories :categoryIds="$product['categories']" />
         </div>

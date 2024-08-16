@@ -6,7 +6,7 @@
                 <img src="{{ $childProduct['image'] }}" x-show="selectedChild == '{{ $childProduct['id'] }}'" class="h-full w-full object-cover object-center">
             @endforeach
         </div>
-        <div class="relative mt-4">
+        <div class="relative mt-4 flex justify-between">
             <div class="flex">
                 <h3 class="text-sm font-medium text-gray-800">{{ $product['name'] }}</h3>
                 <select name="variantPicker" x-model="selectedChild" class="text-sm font-medium text-gray-900 p-0">
