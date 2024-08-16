@@ -32,8 +32,10 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-col py-3">
-        <h2 class="text-gray-400">{{ __('Description') }}</h2>
-        <p class="text-gray-600">{!! $product['description'] !!}</p>
-    </div>
+    @if ($product['description'])
+        <div class="flex flex-col py-3">
+            <h2 class="text-gray-400">{{ __('Description') }}</h2>
+            <p class="text-gray-600">{!! $product['description'] !!}</p>
+        </div>
+    @endif
 </div>

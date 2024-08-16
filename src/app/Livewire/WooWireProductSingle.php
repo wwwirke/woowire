@@ -39,9 +39,9 @@ class WooWireProductSingle extends Component
         $this->currentProduct = $this->products[$currentProductId];
 
         $selectedVariantId = request()->get('variation_id');
-        if(!$selectedVariantId){
-            if($this->currentProduct['childProducts']){
-                $selectedVariantId = $this->currentProduct['childProducts'][0]['id'];
+        if(!$selectedVariantId) {
+            if($this->currentProduct['childProducts']) {
+                $selectedVariantId = $this->currentProduct['childProducts'][array_key_first($this->currentProduct['childProducts'])]['id'];
             } else {
                 $selectedVariantId = null;
             }
@@ -49,7 +49,7 @@ class WooWireProductSingle extends Component
         $this->currentProduct['selectedVariant'] = $selectedVariantId;
 
 
-        if($this->currentProduct['childProducts']){
+        if($this->currentProduct['childProducts']) {
             $childProducts = collect($this->currentProduct['childProducts']);
             $childProduct = $childProducts->where('id', $selectedVariantId)->first();
             $this->selectedAttributes = $childProduct['attributes'];
@@ -61,7 +61,7 @@ class WooWireProductSingle extends Component
     {
         $this->selectedAttributes[$attribute] = $value;
 
-        if(count($this->currentProduct['attributes']) === count($this->selectedAttributes)){            
+        if(count($this->currentProduct['attributes']) === count($this->selectedAttributes)) {
             $this->currentProduct['selectedVariant'] = collect($this->currentProduct['childProducts'])
             ->where('attributes', $this->selectedAttributes)
             ->first()['id'];
